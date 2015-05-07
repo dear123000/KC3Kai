@@ -72,14 +72,14 @@ KC3.prototype.Dashboard.Timers = {
 				case 0:
 					var thisFleet = app.Docks._fleets[num];
 					notifData.title = "Expedition Complete!";
-					notifData.message = "Fleet "+(num+1)+" just arrived from expedition "+thisFleet.api_mission[1];
+					notifData.message = "Fleet "+(num+1)+" just arrived from expedition #"+thisFleet.api_mission[1];
 					notifData.iconUrl = "../../assets/img/quests/expedition.jpg";
 					break;
 				case 1:
 					var thisShip = app.Ships.get( app.Docks._repair[num].api_ship_id );
 					var masterShip = app.Master.ship( thisShip.api_ship_id );
 					notifData.title = "Repairs Complete!";
-					notifData.message = masterShip.english+" is out of ther repair docks!";
+					notifData.message = masterShip.english+" is out of the repair dock!";
 					notifData.iconUrl = "../../assets/img/quests/supply.jpg";
 					break;
 				case 2:
@@ -173,12 +173,15 @@ KC3.prototype.Dashboard.Timers = {
 			}
 			
 			if( thisFleet.api_mission[0] == 1 ){
+				$(".timer-expnum", element).text("#"+thisFleet.api_mission[1]);
 				var now = new Date().getTime();
 				this.seconds[0][index] = Math.ceil(((thisFleet.api_mission[2]-(app.Config.time_dev*1000))-now)/1000);
 			}else if(thisFleet.api_mission[0]==2){
+				$(".timer-expnum", element).text("#"+thisFleet.api_mission[1]);
 				$(".timer-time", element).text("Complete!");
 				
 			}else{
+				$(".timer-expnum", element).text("");
 				$(".timer-time", element).text("Idle...");
 				
 			}
